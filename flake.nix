@@ -89,9 +89,28 @@
       };
       users.groups.openclaw = {};
 
+      # Deploy workspace files (agent identity/soul docs) into openclaw home
+      systemd.services.openclaw-workspace-init = {
+        description = "Initialize OpenClaw workspace files (aldo agent)";
+        wantedBy = [ "multi-user.target" ];
+        before = [ "openclaw-gateway.service" ];
+        serviceConfig = {
+          Type = "oneshot";
+          RemainAfterExit = true;
+          User = "openclaw";
+        };
+        script = ''
+          mkdir -p /var/lib/openclaw/.openclaw/workspace
+          cp -n ${./workspace/IDENTITY.md} /var/lib/openclaw/.openclaw/workspace/IDENTITY.md || true
+          cp -n ${./workspace/SOUL.md} /var/lib/openclaw/.openclaw/workspace/SOUL.md || true
+          cp -n ${./workspace/AGENTS.md} /var/lib/openclaw/.openclaw/workspace/AGENTS.md || true
+          cp -n ${./workspace/BOOTSTRAP.md} /var/lib/openclaw/.openclaw/workspace/BOOTSTRAP.md || true
+        '';
+      };
+
       systemd.services.openclaw-gateway = {
-        description = "OpenClaw gateway (public agent — fly prefix)";
-        after = [ "network.target" ];
+        description = "OpenClaw gateway (public agent — aldo prefix)";
+        after = [ "network.target" "openclaw-workspace-init.service" ];
         wantedBy = [ "multi-user.target" ];
         environment = {
           OPENCLAW_STATE_DIR = "/var/lib/openclaw/state";
