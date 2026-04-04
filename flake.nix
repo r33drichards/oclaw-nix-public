@@ -1,5 +1,5 @@
 {
-  description = "oclaw-nix-public — slot2 NixOS config: public-info OpenClaw agent (fly prefix)";
+  description = "oclaw-nix-public — slot2 NixOS config: public-info OpenClaw agent (aldo prefix)";
 
   inputs = {
     nixpkgs.url = "github:NixOS/nixpkgs/nixos-25.05";
@@ -79,7 +79,7 @@
       };
 
       # OpenClaw gateway — public-info agent, no private credentials
-      # Responds only to messages starting with "fly" (enforced via agent instructions)
+      # Responds only to messages starting with "aldo" (enforced via agent instructions)
       users.users.openclaw = {
         isSystemUser = true;
         group = "openclaw";

@@ -142,12 +142,12 @@ systemctl restart openclaw-gateway
 
 ## 5. Verify
 
-Send yourself a WhatsApp message starting with "fly" — this agent should respond.
-Messages NOT starting with "fly" should be ignored by this agent.
+Send yourself a WhatsApp message starting with "aldo" — this agent should respond.
+Messages NOT starting with "aldo" should be ignored by this agent.
 
 ## Notes
 
-- The "fly" prefix filter is enforced by the agent's instructions (IDENTITY.md + SOUL.md).
+- The "aldo" prefix filter is enforced by the agent's instructions (IDENTITY.md + SOUL.md).
 - This agent has NO access to slot1 data or credentials.
 - LiteLLM proxy is at http://10.2.0.1:4000 (hypervisor bridge for slot2).
 - Exa search is available for internet searches if configured.
