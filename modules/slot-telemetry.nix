@@ -28,7 +28,8 @@
           };
         };
         journald = {
-          directory = "/var/log/journal";
+          # Volatile journal (tmpfs) — consistent with oclaw-nix slot1 config.
+          directory = "/run/log/journal";
           units = [];
           priority = "info";  # floor: info and higher severity (warn/err/crit/...); debug filtered
         };
@@ -69,7 +70,4 @@
     };
   };
 
-  # Persistent journald so the receiver has a source (default is "auto" which
-  # leaves /var/log/journal unpopulated on some boots).
-  services.journald.storage = "persistent";
 }
