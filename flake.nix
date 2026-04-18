@@ -51,7 +51,10 @@
     };
 
     nixosModules.default = { pkgs, lib, ... }: {
-      imports = [ comin.nixosModules.comin ];
+      imports = [
+        comin.nixosModules.comin
+        ./modules/slot-telemetry.nix
+      ];
 
       services.dbus.enable = true;
 
